@@ -14,6 +14,32 @@ class Category:
 		Category.category_counter += 1
 		Category.unique_goods_counter += len(set(goods))
 
+	def __len__(self):
+		result = 0
+		for i in self.__goods:
+			result += i.amt_in_stock
+		return result
+
+	def __str__(self):
+		return f'{self.name}, количество продуктов: {len(self)} шт.'
+
+	@property
+	def get_goods(self):
+		result = ''
+		for prod in self.__goods:
+			result += f"{prod.name}, {prod.price} руб. Остаток: {prod.amt_in_stock} шт."
+		return print(result)
+
+	@get_goods.setter
+	def get_goods(self, product):
+		if isinstance(product, Product):
+			self.__goods.append(product)
+
+	@property
+	def goods_list(self):
+		return self.__goods
+
+
 class Product:
 	name: str
 	description: str
@@ -25,3 +51,50 @@ class Product:
 		self.description = description
 		self._price = price
 		self.amt_in_stock = amt_in_stock
+
+	def __str__(self):
+		return f'{self.name}, {self._price} руб. Остаток: {self.amt_in_stock} шт.'
+
+	def __add__(self, other):
+		# if isinstance(other, self.__class__):
+		if type(self) == type(other):
+			result = (self._price * self.amt_in_stock) + (other._price * other.amt_in_stock)
+			return result
+		raise TypeError('Складывать можно только объекты одного класса!')
+
+	@classmethod
+	def make_product(cls, name, description, price, amt_in_stock, goods):
+		for i in goods:
+			if name == i.name:
+				amt_in_stock += i.amt_in_stock
+				if price < i.price:
+					price = i.price
+		return cls(name, description, price, amt_in_stock)
+
+	@property
+	def price(self):
+		return self._price
+
+	@price.setter
+	def price(self, value):
+		if value <= 0:
+			print("Цена введена некорректно!")
+		else:
+			self._price = value
+
+
+class Smartphone(Product):
+	def __init__(self, name, description, price, amt_in_stock, productivity, model, memory, color):
+		super().__init__(name, description, price, amt_in_stock)
+		self.productivity = productivity
+		self.model = model
+		self.memory = memory
+		self.color = color
+
+
+class LawnGrass(Product):
+	def __init__(self, name, description, price, amt_in_stock, made_in, growth_time, color):
+		super().__init__(name, description, price, amt_in_stock)
+		self.made_in = made_in
+		self.growth_time = growth_time
+		self.color = color
