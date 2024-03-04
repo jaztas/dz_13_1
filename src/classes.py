@@ -1,3 +1,6 @@
+from src.BasicClass import BasicClass
+
+
 class Category:
 	name: str
 	description: str
@@ -40,7 +43,7 @@ class Category:
 		return self.__goods
 
 
-class Product:
+class Product(BasicClass):
 	name: str
 	description: str
 	price: float
@@ -51,6 +54,7 @@ class Product:
 		self.description = description
 		self._price = price
 		self.amt_in_stock = amt_in_stock
+		super().__init__()
 
 	def __str__(self):
 		return f'{self.name}, {self._price} руб. Остаток: {self.amt_in_stock} шт.'
