@@ -1,7 +1,7 @@
-from src.BasicClass import BasicClass
+from src.BasicClass import BasicClass, MixinInfo
 
 
-class Category:
+class Category(MixinInfo):
 	name: str
 	description: str
 	goods: list
@@ -14,6 +14,7 @@ class Category:
 		self.name = name
 		self.description = description
 		self.__goods = goods
+		super().__init__()
 		Category.category_counter += 1
 		Category.unique_goods_counter += len(set(goods))
 
@@ -43,7 +44,7 @@ class Category:
 		return self.__goods
 
 
-class Product(BasicClass):
+class Product(BasicClass, MixinInfo):
 	name: str
 	description: str
 	price: float
@@ -102,3 +103,11 @@ class LawnGrass(Product):
 		self.made_in = made_in
 		self.growth_time = growth_time
 		self.color = color
+
+
+# prod = Product('Продукт1', 'Классный продукт', 1000, 10)
+# print(prod.__repr__())
+# smartphone = Smartphone('Superphone', 'Очень крутой', 1500, 5, '48 часов на одном заряде', '5X Pro', '128 Gb', 'Black')
+# print(smartphone.__repr__())
+# lawn_grass = LawnGrass('Газон', 'Описание газона', 100, 10, 'Russland', '1 month', 'Green')
+# print(lawn_grass.__repr__())
