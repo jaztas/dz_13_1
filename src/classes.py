@@ -105,12 +105,10 @@ class LawnGrass(Product):
 		self.color = color
 
 
-# prod = Product('Продукт1', 'Классный продукт', 1000, 10)
-# print(prod)
-# print(prod.__repr__())
-# smartphone = Smartphone('Superphone', 'Очень крутой', 1500, 5, '48 часов на одном заряде', '5X Pro', '128 Gb', 'Black')
-# print(smartphone)
-# print(smartphone.__repr__())
-# lawn_grass = LawnGrass('Газон', 'Описание газона', 100, 10, 'Russland', '1 month', 'Green')
-# print(lawn_grass)
-# print(lawn_grass.__repr__())
+prod = Product('Продукт1', 'Классный продукт', 1000, 10)
+print(prod)
+smartphone = Smartphone('Superphone', 'Очень крутой', 1500, 5, '48 часов на одном заряде', '5X Pro', '128 Gb', 'Black')
+print(smartphone)
+lawn_grass = LawnGrass('Газон', 'Описание газона', 100, 10, 'Russland', '1 month', 'Green')
+print(lawn_grass)
+
