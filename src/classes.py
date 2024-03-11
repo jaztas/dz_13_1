@@ -27,6 +27,19 @@ class Category(MixinInfo):
 	def __str__(self):
 		return f'{self.name}, количество продуктов: {len(self)} шт.'
 
+	def average_price(self):
+		'''
+
+		средний ценник всех товаров
+		'''
+		try:
+			result = 0
+			for i in self.__goods:
+				result += i.price * i.amt_in_stock
+			return result / len(self)
+		except ZeroDivisionError:
+			print('0')
+
 	@property
 	def get_goods(self):
 		result = ''
@@ -115,4 +128,3 @@ smartphone = Smartphone('Superphone', 'Очень крутой', 1500, 5, '48 ч
 print(smartphone)
 lawn_grass = LawnGrass('Газон', 'Описание газона', 100, 10, 'Russland', '1 month', 'Green')
 print(lawn_grass)
-
