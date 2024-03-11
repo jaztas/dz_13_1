@@ -25,3 +25,27 @@ def test_init_products(products):
 	assert products.description == 'for tasty beverages'
 	assert products._price == 10.50
 	assert products.amt_in_stock == 7
+
+
+def test_get_goods_setter():
+	category = Category("Electronics", "electronic devices", [])
+	product1 = Product("Phone", "Smartphone", 1000, 10)
+	product2 = Product("Phone2", "Stupidphone", 1500, 5)
+
+	category.get_goods = product1
+	assert len(category.goods_list) == 1
+	assert category.goods_list[0] == product1
+
+	with pytest.raises(ValueError):
+		category.get_goods = Product("Android", "really smart", 0, 0)
+
+
+def test_average_price():
+	category = Category("Electronics", "electronic devices", [])
+	product1 = Product("Phone", "Smartphone", 1000, 10)
+	product2 = Product("Phone2", "Stupidphone", 1500, 5)
+	category.get_goods = product1
+	category.get_goods = product2
+
+	expected_average_price = (1000 * 10 + 1500 * 5) / 15
+	assert category.average_price() == expected_average_price
