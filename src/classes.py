@@ -36,6 +36,10 @@ class Category(MixinInfo):
 
 	@get_goods.setter
 	def get_goods(self, product):
+		# if isinstance(product, Product):
+		# 	self.__goods.append(product)
+		if product.amt_in_stock == 0:
+			raise ValueError('Товар с нулевым количеством не может быть добавлен!')
 		if isinstance(product, Product):
 			self.__goods.append(product)
 
