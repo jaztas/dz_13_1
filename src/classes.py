@@ -38,7 +38,7 @@ class Category(MixinInfo):
 				result += i.price * i.amt_in_stock
 			return result / len(self)
 		except ZeroDivisionError:
-			print('0')
+			return 0
 
 	@property
 	def get_goods(self):
