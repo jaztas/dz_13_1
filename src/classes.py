@@ -33,10 +33,11 @@ class Category(MixinInfo):
 		средний ценник всех товаров
 		'''
 		try:
-			result = 0
-			for i in self.__goods:
-				result += i.price * i.amt_in_stock
-			return result / len(self)
+			total_price = sum(product.price * product.amt_in_stock for product in self.__goods)
+			total_amt = sum(product.amt_in_stock for product in self.__goods)
+			if len(self.__goods) == 0:
+				raise ZeroDivisionError
+			return total_price / total_amt
 		except ZeroDivisionError:
 			return 0
 
